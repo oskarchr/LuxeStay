@@ -17,6 +17,7 @@ type Listing = {
   safety_information: string[];
   property_features: string[];
   property_services: string[];
+  property_offers: string[];
   latitude: number | null; // New property for latitude
   longitude: number | null; // New property for longitude
 }

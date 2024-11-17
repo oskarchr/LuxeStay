@@ -1,7 +1,7 @@
 
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link';
-import { FaUser } from 'react-icons/fa'
+import { FaTemperatureHigh, FaUmbrellaBeach, FaUser } from 'react-icons/fa'
 import { IoChevronBackCircle, IoStarOutline } from 'react-icons/io5';
 import FavoriteButton from '../_components/FavoriteButton';
 import MapComponent from '../_components/MapComponent';
@@ -9,6 +9,12 @@ import ImageSwiper from '../_components/ImageSwiper';
 import BookingRequest from '../_components/BookingRequest';
 import { fetchReviewsForListing } from '@/utils/reviews';
 import ReviewsSwiper from '../_components/ReviewsSwiper';
+import { FaWifi } from 'react-icons/fa6';
+import { TbPlayVolleyball, TbToolsKitchen2 } from 'react-icons/tb';
+import { CiParking1 } from 'react-icons/ci';
+import { PiPawPrint } from 'react-icons/pi';
+import { MdOutlinePool } from 'react-icons/md';
+import { GiSoccerField } from 'react-icons/gi';
 
 
 async function DetailsPage ({ params }: { params: { id: string } }) { 
@@ -86,7 +92,42 @@ async function DetailsPage ({ params }: { params: { id: string } }) {
                             <hr className="border-[#D8D5D5] my-4"></hr>
                         </div>
 
-                        <div className="md:bg-white md:border md:grid md:grid-cols-2 md:rounded-2xl md:p-8 md:gap-8 md:max-w-lg">    
+                        <div className="md:bg-white md:border md:grid md:grid-cols-2 md:rounded-2xl md:p-8 md:gap-8 md:max-w-lg">
+                            {/* What this place offers */}
+                            <div className="md:hidden">
+                                <h2 className="font-semibold text-2xl mb-4">What this place offers</h2>
+                                {data.property_offers.map((offer: string, index: number) => (
+                                    <div key={index} className="flex items-center mb-1">
+                                    {offer === "Wifi" && <FaWifi className="mr-2 text-2xl" />}
+                                    {offer === "Kitchen" && (
+                                        <TbToolsKitchen2 className="mr-2 text-2xl" />
+                                    )}
+                                    {offer === "Free parking" && (
+                                        <CiParking1 className="mr-2 text-2xl" />
+                                    )}
+                                    {offer === "Pets allowed" && (
+                                        <PiPawPrint className="mr-2 text-2xl" />
+                                    )}
+                                    {offer === "Pool" && (
+                                        <MdOutlinePool className="mr-2 text-2xl" />
+                                    )}
+                                    {offer === "Sauna" && (
+                                        <FaTemperatureHigh className="mr-2 text-2xl" />
+                                    )}
+                                    {offer === "Football field" && (
+                                        <GiSoccerField className="mr-2 text-2xl" />
+                                    )}
+                                    {offer === "Beach Volleyball" && (
+                                        <TbPlayVolleyball className="mr-2 text-2xl" />
+                                    )}
+                                    {offer === "Private beach" && (
+                                        <FaUmbrellaBeach className="mr-2 text-2xl" />
+                                    )}
+                                    <p>{offer}</p>
+                                    </div>
+                                ))}
+                                <hr className="border-[#D8D5D5] my-4 md:hidden"></hr>
+                            </div>    
                             <div>
                                 <h2 className="font-semibold text-2xl mb-4">House rules</h2>
                                     <p>{data.house_rules.map((item: String, index: number)=> <span key={index}>{item}<br /></span>)}</p>
