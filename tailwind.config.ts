@@ -11,6 +11,16 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        secondary: "var(--secondary)",
+        accent: "var(--accent)",
+        buttonPrimary: "var(--buttonPrimary)",
+        buttonPrimaryHover: "var(--buttonPrimaryHover)",
+        buttonSecondary: "var(--buttonSecondary)",
+        buttonSecondaryHover: "var(--buttonSecondaryHover)"
+      },
+      fontFamily: {
+        title: ['var(--font-playfair)', 'serif'], // Using the CSS variable for Playfair Display
+        body: ['var(--font-opensans)', 'sans-serif'], // Using the CSS variable for Open Sans
       },
     },
   },
