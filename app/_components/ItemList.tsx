@@ -10,10 +10,8 @@ const ItemList = ({ initialListings }: { initialListings: any[] }) => {
   const [listings, setListings] = useState(initialListings);
 
   useEffect(() => {
-    console.log('Filters applied in ItemList:', filters); // Log the filters
     const fetchFilteredListings = async () => {
       const updatedListings = await getFilteredListings(filters);
-      console.log('Updated Listings:', updatedListings);
       setListings(updatedListings);
     };
 
@@ -23,7 +21,7 @@ const ItemList = ({ initialListings }: { initialListings: any[] }) => {
 
 
   return (
-    <div className="justify-center mx-4 mb-24 md:mb-64 md:mx-16 xl:mx-32 md:mt-24 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="justify-center mx-4 mb-24 md:mx-16 md:mt-24 grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 min-h-[calc(100vh-256px)]">
        {listings && listings.length > 0 ? (
         listings.map((item) => (
           <ListingCard
@@ -39,7 +37,7 @@ const ItemList = ({ initialListings }: { initialListings: any[] }) => {
           />
         ))
       ) : (
-        <div>No listings found.</div>  // Display a fallback message if no listings are found
+        <h3 className="font-semibold mt-4">No listings found</h3>
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 'use client'
-import React, { createContext, useContext, useState } from 'react';
+import { getFilteredListings } from '@/utils/listings';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface FilterCriteria {
   searchText: string;
@@ -12,6 +13,7 @@ interface FilterCriteria {
 interface FilterContextProps {
   filters: FilterCriteria;
   setFilters: React.Dispatch<React.SetStateAction<FilterCriteria>>;
+  filteredCount: number;
 }
 
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
@@ -25,12 +27,19 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     priceRange: [null, null],
   });
 
-  const updateFilters = (newFilters: any) => {
-    setFilters((prevFilters) => ({ ...prevFilters, ...newFilters }));
-  };
+  const [filteredCount, setFilteredCount] = useState(0);
+
+  useEffect(() => {
+    const calculateFilteredCount = async () => {
+      const filteredListings = await getFilteredListings(filters);
+      setFilteredCount(filteredListings.length);
+    };
+
+    calculateFilteredCount();
+  }, [filters]);
 
   return (
-    <FilterContext.Provider value={{ filters, setFilters }}>
+    <FilterContext.Provider value={{ filters, setFilters, filteredCount }}>
       {children}
     </FilterContext.Provider>
   );

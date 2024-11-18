@@ -7,6 +7,7 @@ import { IoMdStarOutline } from 'react-icons/io';
 import { MdAirplaneTicket, MdExplore } from "react-icons/md";
 import Searchbar from './Searchbar';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 function Navbar() {
     const currentPathname = usePathname()
@@ -22,7 +23,7 @@ function Navbar() {
         <>
           {/* Conditionally render the mobile bottom navbar */}
           {!isDynamicRoute && (
-            <div className="z-10 fixed flex items-center text-sm justify-between px-10 bottom-0 h-[85px] w-full bg-[#F0F0F0] border rounded-t-xl md:hidden sm:px-24">
+            <div className="z-50 fixed flex items-center text-sm justify-between px-10 bottom-0 h-[85px] w-full bg-[#F0F0F0] border rounded-t-xl md:hidden sm:px-24">
               {/* Mobile bottom navbar */}
               <Link href="/" className={`flex flex-col items-center ${currentPathname == "/" ? "text-accent" : "text-[#666666]"} hover:text-[#555555]`}>    
                 <MdExplore size={23}/>  
@@ -45,28 +46,43 @@ function Navbar() {
     
           {/* Show the desktop navbars on bigger than md screens */}
           <div className="hidden md:flex items-center z-30 fixed top-0 left-0 h-[72px] w-full bg-[#F0F0F0] border ">
-            <div className="hidden md:flex items-center justify-between px-16 xl:max-w-7xl xl:px-auto xl:mx-auto w-full">
+            <div className="hidden md:flex items-center px-16 w-full 2xl:px-48">
               {/* Desktop top navbar */}
-              <Link href="/">
-                LuxestayIcon
+              <Link href="/" className="mr-auto hidden lg:block">
+                <Image 
+                  src="https://jkvkppctrorkcqrbwacw.supabase.co/storage/v1/object/public/icons/LuxeStayLogoLarge.svg"
+                  width={500}
+                  height={500}
+                  alt="LuxeStay logo"
+                  className="w-36"
+                  />
+              </Link>
+              <Link href="/" className="mr-auto lg:hidden">
+                <Image 
+                  src="https://jkvkppctrorkcqrbwacw.supabase.co/storage/v1/object/public/icons/LuxeStayLogoSmall.svg"
+                  width={250}
+                  height={250}
+                  alt="LuxeStay logo"
+                  className="w-12 h-12"
+                  />
               </Link>
               {/* Only render searchbar on home page */}
               {isHomePage && (
-                <div className="flex-1">
+                <div className="flex-1 max-w-xl mr-auto">
                   <Searchbar />
                 </div>
               )}      
-              <div className="flex gap-8">
+              <div className="flex gap-8 items-center">
                 <Link href="/favorites" className="">
                   <p>Favorites</p>
                 </Link>
                 <Link href="/trips" className="">
                   <p>Trips</p>
                 </Link>
+                <Link href="/profile" className="text-[#666666] hover:text-[#555555]">
+                  <FaUserCircle size={45}/>
+                </Link>
               </div>
-              <Link href="/profile" className="text-[#666666] hover:text-[#555555]">
-                <FaUserCircle size={45}/>
-              </Link>
             </div>
           </div>
         </>

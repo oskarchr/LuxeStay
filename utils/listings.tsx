@@ -7,13 +7,11 @@ export const getFilteredListings = async (filters: any) => {
     let query = supabase.from('listings').select('*');
     
   if (filters.searchText) {
-    const searchText = `%${filters.searchText}%`;
-    console.log('Applying search filter:', searchText);
-  
+    const searchText = `%${filters.searchText}%`;  
     query = query.or(`title.ilike.${searchText},country.ilike.${searchText},city.ilike.${searchText}`);
   }
 
-    const features = Array.isArray(filters.features) ? filters.features : [];
+  const features = Array.isArray(filters.features) ? filters.features : [];
   const services = Array.isArray(filters.services) ? filters.services : [];
 
   if (features.length > 0) {
@@ -43,10 +41,6 @@ export const getFilteredListings = async (filters: any) => {
       console.error('Error fetching listings:', error);
       return [];
     }
-
-      // Log fetched listings
-     console.log('Listings fetched:', listings);
-
     
   
     // Fetch reviews and compute average ratings as before

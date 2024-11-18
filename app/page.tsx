@@ -17,7 +17,7 @@ export default async function Home() {
     const initialListings = await getFilteredListings(initialFilters);
   return (
     <>
-    <div className="md:hidden mt-4 mx-5">
+    <div className="md:hidden mt-4">
         {/* Mobile searchbar, only visibly on small devices */}
         <Searchbar />
     </div>

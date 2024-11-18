@@ -48,16 +48,17 @@ async function DetailsPage ({ params }: { params: { id: string } }) {
 
     return (
         <div className="mb-24 md:mx-16 md:mt-[85px] xl:max-w-6xl xl:mx-auto">
-            <h1 className="hidden font-semibold text-2xl md:block">{data.title}</h1>
+            <h1 className="hidden font-semibold text-2xl md:block mb-4">{data.title}</h1>
             <div className="relative">
                 <ImageSwiper
                     images={data.images}
-                    swiperStyle="h-80"
+                    swiperStyle="h-80 md:h-96"
                 />
-                <Link href="/" className="fixed z-10 top-4 left-4 inline-block w-[45px] h-[45px] m-2 rounded-full overflow-hidden md:hidden">
-                    <IoChevronBackCircle size={45} className="bg-white"/>
+                <Link href="/" className="fixed z-10 top-4 left-4 inline-block w-[45px] h-[45px] rounded-full overflow-hidden md:hidden">
+                    <IoChevronBackCircle size={45} className="relative z-30 text-buttonPrimary"/>
+                    <div className="z-20 absolute top-2 left-2 bg-white h-8 w-8 rounded-full"></div>
                 </Link>
-                <FavoriteButton listingId={params.id} iconSize="35" className="fixed top-4 right-4 z-10 md:absolute"/>
+                <FavoriteButton listingId={params.id} iconSize="30" className="fixed top-4 right-4 z-10 md:absolute bg-buttonPrimary rounded-full p-1"/>
             </div>
             <div className="md:grid md:grid-cols-2 m-6 md:my-4 md:mx-0 md:w-full">
                     <div className="md:mr-4">
@@ -152,7 +153,14 @@ async function DetailsPage ({ params }: { params: { id: string } }) {
                         </div>
                         {/* REVIEWS */}
                         <div className="flex flex-col gap-4 md:bg-white md:max-w-lg md:mt-4 md:border md:rounded-2xl md:p-8">
-                            <h3 className="font-semibold text-2xl">Showing 1 of {reviewCount} reviews</h3>
+                            {reviewCount > 0 && (
+                                <h3 className="font-semibold text-2xl">
+                                Showing 1 of {reviewCount} reviews
+                                </h3>
+                            )}
+                            {reviewCount === 0 && (
+                                <h3 className="font-semibold text-2xl">0 reviews</h3>
+                            )}
                             <div className="flex gap-2 items-center md:hidden">
                                 <IoStarOutline size={"25"} className="bg-black text-white p-1 rounded-sm" />
                                 <p className="font-medium">{averageRating.toFixed(1)} • {reviewCount} reviews</p>

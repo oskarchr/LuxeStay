@@ -22,7 +22,6 @@ export default async function Profile() {
     if (error) {
       console.error('Error signing out:', error.message);
     } else {
-      console.log('Signed out successfully');
       redirect('/login')
     }
   }

@@ -77,3 +77,25 @@ export async function createBooking(
   
     return data; // Return the fetched bookings
   }
+
+  export const checkOverlappingBookings = async (
+    listingId?: string,
+    startDate?: string,
+    endDate?: string
+  ) => {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('bookings')
+      .select('*')
+      .eq('listing_id', listingId)
+      .gte('start_date', startDate)
+      .lte('end_date', endDate)
+      .or(`start_date.lte.${endDate},end_date.gte.${startDate}`); // Checking for overlaps
+  
+    if (error) {
+      console.error('Error checking bookings:', error);
+      return false;
+    }
+  
+    return data.length > 0; // Returns true if there's an overlap
+  };

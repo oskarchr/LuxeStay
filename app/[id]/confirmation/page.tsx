@@ -32,7 +32,7 @@ async function BookingConfirmationPage({ params }: { params: { id: string } }) {
       </div>
       <div className="flex flex-col gap-4 bg-white m-4 px-4 py-6 shadow-xl rounded-xl max-w-4xl">
         <div>
-          <p>Booking ID:</p>
+          <p>Booking ID: {params.id.split('-')[0]}</p>
           <p className="text-secondary">Booking Date: {new Date(data.start_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - {new Date(data.end_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</p>
         </div>
         <div className="flex gap-4">

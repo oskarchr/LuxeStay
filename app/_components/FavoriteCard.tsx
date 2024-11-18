@@ -31,7 +31,7 @@ const FavoriteCard: React.FC<FavoriteCardProps> = ({
   onRemoveFavorite
 }) => {
   return (
-        <div className="relative bg-white m-4 shadow-xl rounded-lg max-h-48 overflow-hidden max-w-md">
+        <div className="relative bg-white m-4 shadow-xl rounded-lg max-h-48 overflow-hidden">
             <Link href={`/${listing_id}`} className="flex items-center">
             {image && (
                 <Image

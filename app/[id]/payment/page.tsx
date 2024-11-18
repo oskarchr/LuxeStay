@@ -6,6 +6,7 @@ import calculateNights from '@/utils/calculateNights'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { MdOutlinePayment } from 'react-icons/md'
 
 function PaymentPage() {
   const { bookingDetails, setBookingDetails } = useBooking();
@@ -16,8 +17,6 @@ function PaymentPage() {
   // Simulate payment confirmation after the user successfully pays
   const handlePaymentConfirmation = async () => {
     const { listingId, startDate, endDate, guestCount, totalPrice, userId } = bookingDetails;
-  
-    console.log("Booking Details:", bookingDetails);  // Log booking details
   
     if (!listingId || !startDate || !endDate || !guestCount || !totalPrice || !userId) {
       console.error('Missing booking details:', bookingDetails);  // Log missing details
@@ -100,6 +99,16 @@ function PaymentPage() {
           </div>
         </div>
       </div>
+      <div className="w-full max-w-lg mt-8">
+        <div className="flex justify-between">
+          <h3 className="font-semibold text-lg">Payment method</h3>
+          <p>CHANGE</p>
+        </div>
+        <div className="flex gap-4 items-center mt-2 ml-2 mb-4">
+          <MdOutlinePayment size={35} />
+          <p>**** **** **** 1747</p>
+        </div>
+      </div>
       <button
           onClick={handlePaymentConfirmation}
           className="bg-buttonPrimary hover:bg-buttonPrimaryHover text-white py-3 px-12 rounded-md mt-4"
@@ -107,36 +116,6 @@ function PaymentPage() {
           Confirm Payment
         </button>
     </div>
-    // <div>
-    //   <div className="flex items-center justify-center relative mt-8">
-    //     <BackButton className="absolute left-4" />
-    //     <h1 className="text-center font-semibold text-3xl">Payment</h1>
-    //   </div>
-    //   <div className="m-16">
-    //     <h1 className="text-xl font-semibold">{bookingDetails.title}</h1>
-    //     <p>{bookingDetails.city}, {bookingDetails.country}</p>
-    //     <p>Start Date: {bookingDetails.startDate}</p>
-    //     <p>End Date: {bookingDetails.endDate}</p>
-    //     <p>Guests: {bookingDetails.guestCount}</p>
-    //     <p>Total Price: ${bookingDetails.totalPrice}</p>
-    //     {bookingDetails.images[0] && (
-    //       <Image
-    //         src={bookingDetails.images[0]}
-    //         width={500}
-    //         height={500}
-    //         alt={`Image of ${bookingDetails.title}`}
-    //         className="rounded-lg object-cover w-full"
-    //       />
-    //     )}
-    //     {/* Simulate payment confirmation */}
-    //     <button
-    //       onClick={handlePaymentConfirmation}
-    //       className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md"
-    //     >
-    //       Confirm Payment
-    //     </button>
-    //   </div>
-    // </div>
   );
 }
 

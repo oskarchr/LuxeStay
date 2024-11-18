@@ -51,7 +51,7 @@ const ReviewsPage = ({ params }: { params: { id: string } }) => {
         };
 
     return (
-        <div className="flex justify-center min-h-[calc(100vh-256px)] mx-auto max-w-4xl">
+        <div className="flex justify-center min-h-[calc(100vh-256px)] mx-auto max-w-4xl mb-24 md:mb-0">
             <div className="relative m-6 md:mt-24 w-full">
                 <BackButton className="md:hidden absolute" />
                 <h1 className="mb-12 font-semibold text-3xl text-center">Reviews</h1>

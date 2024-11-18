@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'; // Using next/navigation for client
 import { useBooking } from '@/context/booking';
 import { FaChevronDown, FaChevronUp, FaMinus, FaPlus } from 'react-icons/fa6';
 import calculateNights from '@/utils/calculateNights';
+import { checkOverlappingBookings } from '@/utils/bookings';
 
 interface BookingRequestProps extends BookingDetails {
     className?: string;
@@ -58,6 +59,8 @@ const BookingRequest: React.FC<BookingRequestProps> = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [guestCountState, setGuestCountState] = useState(bookingData.guestCount);
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -105,11 +108,22 @@ const BookingRequest: React.FC<BookingRequestProps> = ({
   };
 
   // Function to handle navigation to the payment page
-  const handleNext = () => {
-    console.log(userId)
+  const handleNext = async () => {
     if (!userId) {
       router.push("/login");
       return;
+    }
+
+    // Check for overlapping bookings before proceeding
+    const isOverlap = await checkOverlappingBookings(
+      listingId,
+      bookingData.startDate,
+      bookingData.endDate
+    );
+
+    if (isOverlap) {
+      setErrorMessage('This booking overlaps with another existing booking. Please choose different dates.');
+      return
     }
 
     setBookingDetails((prev) => ({
@@ -124,6 +138,11 @@ const BookingRequest: React.FC<BookingRequestProps> = ({
   return (
     <div className={`${className} md:max-w-lg md:bg-white md:border md:rounded-2xl md:p-8`}>
       <div className="flex flex-col mb-24 mt-4 md:m-0">
+        {errorMessage && (
+          <div className="bg-red-500 text-white p-4 mb-4 rounded max-w-md">
+            {errorMessage}
+          </div>
+        )}
         <p className="text-center font-semibold md:hidden">CHECK-IN / CHECK-OUT</p>
         <h3 className="hidden text-2xl font-semibold md:block">€{pricePerNight} / night</h3>
         <div className="border-2 border-secondary rounded-lg shadow-lg m-4 md:border-0 md:flex md:flex-col md:gap-2 md:shadow-none md:mx-0">

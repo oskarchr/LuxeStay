@@ -34,8 +34,6 @@ async function RequestPage({ params }: { params: { id: string } }) {
         return <div>No listing found.</div>;
     }
 
-    console.log("userid : " , userId)
-
     return (
         <div className="flex flex-col items-center h-[calc(100vh-256px)]">
             <div className="flex justify-center w-full relative mt-8 md:mt-24">

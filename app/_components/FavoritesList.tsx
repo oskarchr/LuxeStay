@@ -32,8 +32,7 @@ const FavoritesList: React.FC<FavoritesListProps> = ({ initialFavorites, userId 
   return (
     <div className="flex flex-col items-center mx-6 mt-6 md:mt-24 min-h-[calc(100vh-256px)]">
         <h1 className="font-semibold text-3xl text-center mb-8">Favorites</h1>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 w-full">
-            
+        <div className="grid md:grid-cols-2 xl:grid-cols-3">
             {favorites.length === 0 ? (
                 <p className="text-center text-gray-500">No favorites yet.</p>
             ) : (
