@@ -41,11 +41,11 @@ export default async function Profile() {
         
         <h3 className="my-8 text-2xl font-semibold">Account settings</h3>
 
-        <div className="flex items-center mx-4 gap-2">
+        <Link href="profile/edit" className="flex items-center mx-4 gap-2">
           <FaUserCircle size={28} className="text-[#777777]"/>
           <p>Personal information</p>
           <IoChevronForward size={24} className="ml-auto"/>
-        </div>
+        </Link >
         <hr className="border-[#D8D5D5] my-4"></hr>
 
         <Link href="" className="flex items-center mx-4 gap-2">
