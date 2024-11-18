@@ -1,9 +1,9 @@
-'use client'
-import { createClient } from '@/utils/supabase/client';
-import React, { useEffect, useState } from 'react';
-import ListingCard from './ListingCard';
-import { useFilters } from '@/context/filter';
-import { getFilteredListings } from '@/utils/listings';
+"use client";
+import { createClient } from "@/utils/supabase/client";
+import React, { useEffect, useState } from "react";
+import ListingCard from "./ListingCard";
+import { useFilters } from "@/context/filter";
+import { getFilteredListings } from "@/utils/listings";
 
 const ItemList = ({ initialListings }: { initialListings: any[] }) => {
   const { filters } = useFilters();
@@ -16,13 +16,11 @@ const ItemList = ({ initialListings }: { initialListings: any[] }) => {
     };
 
     fetchFilteredListings();
-
   }, [filters]);
-
 
   return (
     <div className="justify-center mx-4 mb-24 md:mx-16 md:mt-24 grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 min-h-[calc(100vh-256px)]">
-       {listings && listings.length > 0 ? (
+      {listings && listings.length > 0 ? (
         listings.map((item) => (
           <ListingCard
             id={item.id}

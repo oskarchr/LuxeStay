@@ -1,5 +1,5 @@
-'use client'
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+"use client";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface BookingContextType {
   bookingDetails: BookingDetails;
@@ -8,14 +8,16 @@ interface BookingContextType {
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
 
-export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const BookingProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [bookingDetails, setBookingDetails] = useState<BookingDetails>({
     startDate: null,
     endDate: null,
     guestCount: 1,
-    title: '',
-    country: '',
-    city: '',
+    title: "",
+    country: "",
+    city: "",
     images: [],
     latitude: null,
     longitude: null,
@@ -24,6 +26,7 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
     totalPrice: null,
     maxGuests: 1,
     userId: null,
+    cleaningFee: null
   });
 
   return (

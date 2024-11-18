@@ -1,9 +1,9 @@
-'use client'
-import { useFilters } from '@/context/filter';
-import { useEffect, useState } from 'react';
-import { IoMdSearch } from 'react-icons/io';
-import { MdFilterList } from 'react-icons/md';
-import FilterModal from './FilterModal';
+"use client";
+import { useFilters } from "@/context/filter";
+import { useEffect, useState } from "react";
+import { IoMdSearch } from "react-icons/io";
+import { MdFilterList } from "react-icons/md";
+import FilterModal from "./FilterModal";
 
 const Searchbar: React.FC = () => {
   const { filters, setFilters } = useFilters();
@@ -14,24 +14,25 @@ const Searchbar: React.FC = () => {
     const queryParams = new URLSearchParams(window.location.search);
 
     if (isFilterModalOpen) {
-      queryParams.delete('modal');
+      queryParams.delete("modal");
     } else {
-      queryParams.set('modal', 'filter');
+      queryParams.set("modal", "filter");
     }
 
-    window.history.pushState(null, '', '?' + queryParams.toString());
+    window.history.pushState(null, "", "?" + queryParams.toString());
   };
 
   return (
     <div className="z-20 relative">
-
-      <div className="flex items-center bg-white h-12 p-4 rounded-full drop-shadow-sm mx-4">  
+      <div className="flex items-center bg-white h-12 p-4 rounded-full drop-shadow-sm mx-4">
         <IoMdSearch size={24} />
         <input
           type="text"
           placeholder="Where to?"
           value={filters.searchText}
-          onChange={(e) => setFilters((prev) => ({ ...prev, searchText: e.target.value }))}
+          onChange={(e) =>
+            setFilters((prev) => ({ ...prev, searchText: e.target.value }))
+          }
           className="mx-2 focus:outline-none w-full"
         />
         <button
@@ -43,9 +44,11 @@ const Searchbar: React.FC = () => {
       </div>
 
       {isFilterModalOpen && (
-        <FilterModal closeModal={toggleFilterModal} toggleModal={toggleFilterModal} />
+        <FilterModal
+          closeModal={toggleFilterModal}
+          toggleModal={toggleFilterModal}
+        />
       )}
-      
     </div>
   );
 };

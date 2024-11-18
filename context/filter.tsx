@@ -1,6 +1,6 @@
-'use client'
-import { getFilteredListings } from '@/utils/listings';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+"use client";
+import { getFilteredListings } from "@/utils/listings";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface FilterCriteria {
   searchText: string;
@@ -18,9 +18,11 @@ interface FilterContextProps {
 
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
 
-export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [filters, setFilters] = useState<FilterCriteria>({
-    searchText: '',
+    searchText: "",
     features: [],
     services: [],
     maxGuests: null,
@@ -47,6 +49,7 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
 export const useFilters = (): FilterContextProps => {
   const context = useContext(FilterContext);
-  if (!context) throw new Error('useFilters must be used within a FilterProvider');
+  if (!context)
+    throw new Error("useFilters must be used within a FilterProvider");
   return context;
 };
